@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Bear : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject roarWavePrefab;
+    public Transform roarWaveSpawnPoint;
+    public float roarLaunchSpeed;
+
+    Rigidbody2D rb;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Roar();
+        }
+    }
+
+    public void Roar()
+    {
+        GameObject roarWave = Instantiate(roarWavePrefab, roarWaveSpawnPoint.position, transform.rotation, null);
+        roarWave.GetComponent<Rigidbody2D>().velocity = new Vector2(rb.velocity.x, 0);
+        roarWave.GetComponent<Rigidbody2D>().AddForce(Vector2.right * roarLaunchSpeed);
     }
 }

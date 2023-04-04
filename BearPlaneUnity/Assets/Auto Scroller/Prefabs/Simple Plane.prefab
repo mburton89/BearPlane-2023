@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8378654656699101385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5625209359744956937}
+  m_Layer: 0
+  m_Name: Pilot Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5625209359744956937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378654656699101385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.61, y: -0.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4891572772264158929}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9203664255224226625
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,9 +43,9 @@ GameObject:
   - component: {fileID: 4256388400583247162}
   - component: {fileID: 2572917233604337054}
   - component: {fileID: 2847789166112658103}
-  - component: {fileID: 890777478332303901}
   - component: {fileID: 3308724235461021769}
   - component: {fileID: 5376165636496884295}
+  - component: {fileID: 4079660215937573983}
   m_Layer: 0
   m_Name: Simple Plane
   m_TagString: Untagged
@@ -33,7 +64,8 @@ Transform:
   m_LocalPosition: {x: 4.18, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5625209359744956937}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,23 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376292fbf99b882429afdf81719a81d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
---- !u!70 &890777478332303901
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203664255224226625}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.08, y: 0.3}
-  m_Size: {x: 3.33, y: 1.58}
-  m_Direction: 1
+  speed: 18
 --- !u!114 &3308724235461021769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,13 +162,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9203664255224226625}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9527836c82fdbf4ab8206838e436638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572917233604337054}
-  tiltSpeed: 100
+  tiltSpeed: 200
   maxTiltAngle: 45
 --- !u!114 &5376165636496884295
 MonoBehaviour:
@@ -166,3 +182,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a406e706ab505542825b738ea8952dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pilotPrefab: {fileID: 8765447072851436861, guid: 489547b14d29c3c44af319c935b0636c, type: 3}
+  pilotSpawnPoint: {fileID: 5625209359744956937}
+  pilotMinLaunchSpeed: 200
+  pilotMaxLaunchSpeed: 400
+  pilotMinLaunchTorque: 320
+  pilotMaxLaunchTorque: 385
+  crashSpeed: 0.01
+--- !u!70 &4079660215937573983
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203664255224226625}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.55}
+  m_Size: {x: 7.63, y: 1.26}
+  m_Direction: 1
