@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a37536ef656cfa449f069691a0a1428, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0ce9a7c37567734fa5549c3e116b873, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   pilotMinLaunchTorque: 320
   pilotMaxLaunchTorque: 385
   crashSpeed: 0.01
+  noPilotSprite: {fileID: 21300000, guid: aebbbed203113f0439892058a6847f6f, type: 3}
 --- !u!70 &4079660215937573983
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,6 +203,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.55}
-  m_Size: {x: 7.63, y: 1.26}
+  m_Offset: {x: 0, y: -0.41}
+  m_Size: {x: 7.25, y: 2.66}
   m_Direction: 1

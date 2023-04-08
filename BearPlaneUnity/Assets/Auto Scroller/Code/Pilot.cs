@@ -34,7 +34,7 @@ public class Pilot : MonoBehaviour
     {
         int rand = Random.Range(0, 5);
 
-        if (rand != 3) //dud parachute
+        if (rand == 3) //dud parachute
         {
             yield return new WaitForSeconds(secondsToWaitForParachute);
             //spriteRenderer.sprite = parachuteDudSprite;

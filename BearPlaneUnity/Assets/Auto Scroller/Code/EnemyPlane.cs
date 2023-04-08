@@ -15,9 +15,13 @@ public class EnemyPlane : MonoBehaviour
     bool hasLaunchedPilot;
     public float crashSpeed;
 
+    SpriteRenderer spriteRenderer;
+    public Sprite noPilotSprite;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -56,5 +60,7 @@ public class EnemyPlane : MonoBehaviour
         hasLaunchedPilot = true;
 
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
+
+        spriteRenderer.sprite = noPilotSprite;
     }
 }
