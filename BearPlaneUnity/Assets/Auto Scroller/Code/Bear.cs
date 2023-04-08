@@ -28,5 +28,7 @@ public class Bear : MonoBehaviour
         GameObject roarWave = Instantiate(roarWavePrefab, roarWaveSpawnPoint.position, transform.rotation, null);
         roarWave.GetComponent<Rigidbody2D>().velocity = new Vector2(rb.velocity.x, 0);
         roarWave.GetComponent<Rigidbody2D>().AddForce(Vector2.right * roarLaunchSpeed);
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
     }
 }

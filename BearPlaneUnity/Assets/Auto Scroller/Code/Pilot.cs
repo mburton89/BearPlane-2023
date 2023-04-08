@@ -32,12 +32,25 @@ public class Pilot : MonoBehaviour
 
     private IEnumerator EstablishDrag()
     {
-        yield return new WaitForSeconds(secondsToWaitForParachute);
-        hasDeployedParachute = true;
-        spriteRenderer.sprite = parachuteSprite;
-        rb.AddTorque(-rb.rotation);
-        rb.gravityScale = rb.gravityScale * 0.3f;
-        rb.drag = postParachuteDrag;
+        int rand = Random.Range(0, 5);
+
+        if (rand != 3) //dud parachute
+        {
+            yield return new WaitForSeconds(secondsToWaitForParachute);
+            //spriteRenderer.sprite = parachuteDudSprite;
+            //SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Parachute);
+            rb.gravityScale *= 4f;
+        }
+        else
+        {
+            yield return new WaitForSeconds(secondsToWaitForParachute);
+            hasDeployedParachute = true;
+            spriteRenderer.sprite = parachuteSprite;
+            rb.AddTorque(-rb.rotation);
+            rb.gravityScale = rb.gravityScale * 0.3f;
+            rb.drag = postParachuteDrag;
+            SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Parachute);
+        }
     }
 
     public void Explode()
@@ -45,6 +58,7 @@ public class Pilot : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Blood"); // Load the prefab from the Resources folder
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
         Destroy(gameObject);
     }
 }

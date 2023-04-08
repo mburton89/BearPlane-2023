@@ -35,6 +35,7 @@ public class EnemyPlane : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Explosion"); // Load the prefab from the Resources folder
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
         Destroy(gameObject);
     }
 
@@ -53,5 +54,7 @@ public class EnemyPlane : MonoBehaviour
         launchedPilot.GetComponent<DestroyPlaneOnImpact>().ownedPlane = gameObject;
 
         hasLaunchedPilot = true;
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
     }
 }
