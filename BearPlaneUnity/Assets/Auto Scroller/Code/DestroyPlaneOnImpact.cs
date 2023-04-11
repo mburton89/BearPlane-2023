@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyPlaneOnImpact : MonoBehaviour
 {
     [HideInInspector] public GameObject ownedPlane;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

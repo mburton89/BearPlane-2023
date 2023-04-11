@@ -59,6 +59,8 @@ public class Pilot : MonoBehaviour
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
         Destroy(gameObject);
+
     }
 }

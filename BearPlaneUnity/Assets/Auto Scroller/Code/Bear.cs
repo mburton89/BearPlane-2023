@@ -9,10 +9,14 @@ public class Bear : MonoBehaviour
     public float roarLaunchSpeed;
 
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
+
+    public List<Sprite> sprites;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -30,5 +34,14 @@ public class Bear : MonoBehaviour
         roarWave.GetComponent<Rigidbody2D>().AddForce(Vector2.right * roarLaunchSpeed);
 
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
+
+        StartCoroutine(ShowRoarSprite());
+    }
+
+    private IEnumerator ShowRoarSprite()
+    {
+        spriteRenderer.sprite = sprites[1];
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.sprite = sprites[0];
     }
 }
