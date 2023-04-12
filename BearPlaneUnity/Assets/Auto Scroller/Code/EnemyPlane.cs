@@ -33,6 +33,14 @@ public class EnemyPlane : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<EnemyPlane>())
+        {
+            collision.gameObject.GetComponent<EnemyPlane>().Explode();
+        }
+    }
+
     public void Explode()
     {
         //LaunchPilot();

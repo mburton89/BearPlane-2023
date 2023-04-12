@@ -27,14 +27,15 @@ public class YMovementHandler : MonoBehaviour
     {
         if (Input.touchCount > 0) // Check if there is any touch input
         {
+
             Touch touch = Input.GetTouch(0); // Get the first touch input
+
+            if (touch.position.x > 900) return;
 
             _previousYTouchPosition = _currentYTouchPosition;
             _currentYTouchPosition = touch.position.y;
 
             float newYForce = _currentYTouchPosition - _previousYTouchPosition;
-
-            rb.AddForce(new Vector2(0, newYForce * acceleration));
 
             if (_previousYTouchPosition != 0)
             {

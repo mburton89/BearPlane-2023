@@ -36,5 +36,11 @@ public class CloudSpawner : MonoBehaviour
         Vector3 spawnPos = new Vector3(_xSpawnPos + _currentX, Random.Range(_minY, _maxY), Random.Range(_minZ, _maxZ));
         GameObject cloud = Instantiate(_cloudPrefabs[Random.Range(0, _cloudPrefabs.Count)], spawnPos, transform.rotation, null);
         cloud.GetComponent<SpriteRenderer>().sortingOrder = -(int)spawnPos.z;
+
+        Color newColor = cloud.GetComponent<SpriteRenderer>().color;
+
+        print((100f - Mathf.Abs(spawnPos.z)) / 100f);
+
+        cloud.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f - ((Mathf.Abs(spawnPos.z)) / 100f));
     }
 }

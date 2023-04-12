@@ -44,4 +44,15 @@ public class Bear : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         spriteRenderer.sprite = sprites[0];
     }
+
+    public void Explode()
+    {
+        //LaunchPilot();
+        GameObject prefab = Resources.Load<GameObject>("Explosion"); // Load the prefab from the Resources folder
+        Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
+        ScreenShaker.Instance.ShakeScreen();
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
+        GameManager.Instance.Restart();
+        Destroy(gameObject);
+    }
 }
