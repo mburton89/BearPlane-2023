@@ -4976,8 +4976,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pilotPrefab: {fileID: 8765447072851436861, guid: 489547b14d29c3c44af319c935b0636c, type: 3}
   pilotSpawnPoint: {fileID: 5625209359744956937}
-  pilotMinLaunchSpeed: 350
-  pilotMaxLaunchSpeed: 400
+  pilotMinLaunchSpeed: 342
+  pilotMaxLaunchSpeed: 365
   pilotMinLaunchTorque: 320
   pilotMaxLaunchTorque: 385
   crashSpeed: 0.015
