@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        Application.targetFrameRate = 60f;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
