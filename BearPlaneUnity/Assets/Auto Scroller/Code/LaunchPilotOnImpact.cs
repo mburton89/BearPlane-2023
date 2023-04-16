@@ -8,7 +8,7 @@ public class LaunchPilotOnImpact : MonoBehaviour
     {
         if (collision.GetComponent<EnemyPlane>())
         {
-            collision.GetComponent<EnemyPlane>().LaunchPilot(); 
+            collision.GetComponent<EnemyPlane>().EjectPilot(); 
         }
     }
 
@@ -16,7 +16,7 @@ public class LaunchPilotOnImpact : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EnemyPlane>())
         {
-            collision.gameObject.GetComponent<EnemyPlane>().LaunchPilot();
+            collision.gameObject.GetComponent<EnemyPlane>().EjectPilot();
         }
     }
 }

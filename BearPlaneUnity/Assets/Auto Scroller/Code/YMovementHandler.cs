@@ -55,7 +55,7 @@ public class YMovementHandler : MonoBehaviour
 
         if (verticalInput != 0)
         {
-            float velocity = verticalInput * acceleration;
+            float velocity = verticalInput * acceleration * 3;
             rb.AddForce(Vector2.up * velocity);
         }
     }

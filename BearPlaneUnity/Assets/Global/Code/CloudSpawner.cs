@@ -39,8 +39,6 @@ public class CloudSpawner : MonoBehaviour
 
         Color newColor = cloud.GetComponent<SpriteRenderer>().color;
 
-        print((100f - Mathf.Abs(spawnPos.z)) / 100f);
-
         cloud.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f - ((Mathf.Abs(spawnPos.z)) / 100f));
     }
 }

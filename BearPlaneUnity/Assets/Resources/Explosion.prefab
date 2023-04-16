@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8535592978284947573}
   - component: {fileID: 8535592978284947574}
   - component: {fileID: 675339466797516976}
-  - component: {fileID: 4135645979715812218}
+  - component: {fileID: 140235749054852176}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4888,7 +4888,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
---- !u!114 &4135645979715812218
+--- !u!114 &140235749054852176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4897,7 +4897,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8535592978284947575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b79683ab58ab74d98b4b3ba9987270, type: 3}
+  m_Script: {fileID: 11500000, guid: 85686115a710a7a41a08c6ffd6a9e693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownedPlane: {fileID: 0}

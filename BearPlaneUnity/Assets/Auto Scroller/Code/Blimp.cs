@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class Blimp : MonoBehaviour
 {
+    public float verticalVelocity;
+    Rigidbody2D rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        int rand = Random.Range(0, 4);
+
+        if (rand == 1)
+        {
+            rb.AddForce(Vector2.up * verticalVelocity);
+            print("rand == 1");
+        }
+        else if (rand == 2)
+        {
+            rb.AddForce(Vector2.down * verticalVelocity);
+
+            print("rand == 2");
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Bear>())

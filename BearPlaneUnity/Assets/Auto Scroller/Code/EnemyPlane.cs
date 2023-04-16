@@ -39,6 +39,24 @@ public class EnemyPlane : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyPlane>().Explode();
         }
+
+        if (collision.gameObject.GetComponent<Bear>())
+        {
+            Bear bear = collision.gameObject.GetComponent<Bear>();
+            Vector2 launchVelocity = new Vector2(bear.gameObject.GetComponent<MoveRight>().speed + 4, bear.rb.velocity.y * 1.4f);
+            LaunchPilot(launchVelocity);
+
+            Explode();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Pilot>() && collision.gameObject.GetComponent<Pilot>().ownedPlane != gameObject)
+        {
+            collision.gameObject.GetComponent<Pilot>().Explode();
+            Explode();
+        }
     }
 
     public void Explode()
@@ -51,7 +69,7 @@ public class EnemyPlane : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void LaunchPilot()
+    public void EjectPilot()
     {
         GameObject launchedPilot = Instantiate(pilotPrefab, pilotSpawnPoint.position, transform.rotation, null);
 
@@ -63,12 +81,31 @@ public class EnemyPlane : MonoBehaviour
         float randLaunchTorque = Random.Range(pilotMinLaunchTorque, pilotMaxLaunchTorque);
         launchedPilot.GetComponent<Rigidbody2D>().AddTorque(randLaunchTorque);
 
-        launchedPilot.GetComponent<DestroyPlaneOnImpact>().ownedPlane = gameObject;
+        launchedPilot.GetComponent<Pilot>().ownedPlane = gameObject;
 
         hasLaunchedPilot = true;
 
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
 
         spriteRenderer.sprite = noPilotSprite;
+    }
+
+    public void LaunchPilot(Vector2 velocity)
+    {
+        GameObject launchedPilot = Instantiate(pilotPrefab, pilotSpawnPoint.position, transform.rotation, null);
+
+        launchedPilot.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        float randLaunchTorque = Random.Range(pilotMinLaunchTorque, pilotMaxLaunchTorque);
+        launchedPilot.GetComponent<Rigidbody2D>().AddTorque(randLaunchTorque);
+
+        launchedPilot.GetComponent<Pilot>().ownedPlane = gameObject;
+        launchedPilot.GetComponent<Pilot>().shouldDeployParachute = false;
+
+        hasLaunchedPilot = true;
+
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
+
+        print("launchedPilot.GetComponent<Rigidbody2D>().velocity  " + launchedPilot.GetComponent<Rigidbody2D>().velocity);
     }
 }

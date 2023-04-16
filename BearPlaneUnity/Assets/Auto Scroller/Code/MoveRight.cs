@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveRight : MonoBehaviour
 {
-    public float speed = 5f; // The speed at which the object moves to the right
+    public float speed; // The speed at which the object moves to the right
 
     private Rigidbody2D rb; // The object's Rigidbody2D component
 

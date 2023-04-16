@@ -14,12 +14,17 @@ public class Pilot : MonoBehaviour
     public Sprite parachuteSprite;
 
     bool hasDeployedParachute;
+    bool canExplode;
+    public float secondsBeforeCanExplode = 0.2f;
+    [HideInInspector] public bool shouldDeployParachute = true;
+    [HideInInspector] public GameObject ownedPlane;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, 3);
-        StartCoroutine(EstablishDrag());
+        StartCoroutine(CanExplodeBuffer());
+        StartCoroutine(DeployParachute());
     }
 
     void Update()
@@ -30,20 +35,14 @@ public class Pilot : MonoBehaviour
         }
     }
 
-    private IEnumerator EstablishDrag()
+    private IEnumerator DeployParachute()
     {
         int rand = Random.Range(0, 5);
 
-        if (rand == 3) //dud parachute
+        yield return new WaitForSeconds(secondsToWaitForParachute);
+
+        if (shouldDeployParachute) //dud parachute
         {
-            yield return new WaitForSeconds(secondsToWaitForParachute);
-            //spriteRenderer.sprite = parachuteDudSprite;
-            //SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Parachute);
-            rb.gravityScale *= 4f;
-        }
-        else
-        {
-            yield return new WaitForSeconds(secondsToWaitForParachute);
             hasDeployedParachute = true;
             spriteRenderer.sprite = parachuteSprite;
             rb.AddTorque(-rb.rotation);
@@ -51,16 +50,27 @@ public class Pilot : MonoBehaviour
             rb.drag = postParachuteDrag;
             SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Parachute);
         }
+        else
+        {
+            rb.gravityScale *= 4f;
+        }
     }
 
     public void Explode()
     {
+        if (!canExplode) return;
+
         GameObject prefab = Resources.Load<GameObject>("Blood"); // Load the prefab from the Resources folder
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
         Destroy(gameObject);
+    }
 
+    private IEnumerator CanExplodeBuffer()
+    {
+        yield return new WaitForSeconds(secondsBeforeCanExplode);
+        canExplode = true;
     }
 }

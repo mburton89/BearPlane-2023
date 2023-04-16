@@ -8,7 +8,7 @@ public class Bear : MonoBehaviour
     public Transform roarWaveSpawnPoint;
     public float roarLaunchSpeed;
 
-    Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
 
     public List<Sprite> sprites;
