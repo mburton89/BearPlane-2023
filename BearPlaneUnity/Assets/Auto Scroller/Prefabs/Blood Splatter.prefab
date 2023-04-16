@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55101e06c0ca45543858631e79890798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minParticleSize: 0.3
-  maxParticleSize: 0.5
+  minParticleSize: 0.36
+  maxParticleSize: 0.6
   minMovementSpeed: 0
   maxMovementSpeed: 0
-  minSecondsToLive: 0.5
-  maxSecondsToLive: 1.5
+  minSecondsToLive: 0.8
+  maxSecondsToLive: 1.8
