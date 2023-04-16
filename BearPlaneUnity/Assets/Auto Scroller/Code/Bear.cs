@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bear : MonoBehaviour
 {
+    public static Bear Instance;
+
     public GameObject roarWavePrefab;
     public Transform roarWaveSpawnPoint;
     public float roarLaunchSpeed;
@@ -13,9 +15,18 @@ public class Bear : MonoBehaviour
 
     public List<Sprite> sprites;
 
+    MoveRight moveRight;
+    public float speedAddifier;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveRight = GetComponent<MoveRight>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -29,11 +40,15 @@ public class Bear : MonoBehaviour
 
     public void Roar()
     {
+        if (ShoutBar.Instance.currentFill < 1f) return;
+
         GameObject roarWave = Instantiate(roarWavePrefab, roarWaveSpawnPoint.position, transform.rotation, null);
         roarWave.GetComponent<Rigidbody2D>().velocity = new Vector2(rb.velocity.x, 0);
         roarWave.GetComponent<Rigidbody2D>().AddForce(Vector2.right * roarLaunchSpeed);
 
-        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Shout);
+
+        ShoutBar.Instance.StartRefill();
 
         StartCoroutine(ShowRoarSprite());
     }
@@ -54,5 +69,15 @@ public class Bear : MonoBehaviour
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
         GameManager.Instance.Restart();
         Destroy(gameObject);
+    }
+
+    public void IncreaseSpeed()
+    {
+        moveRight.speed += speedAddifier;
+    }
+
+    public void IncreaseSpeed(float multiplier)
+    {
+        moveRight.speed += speedAddifier * multiplier;
     }
 }

@@ -4853,11 +4853,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4891572772264158929}
   - component: {fileID: 4256388400583247162}
-  - component: {fileID: 2572917233604337054}
   - component: {fileID: 2847789166112658103}
   - component: {fileID: 3308724235461021769}
   - component: {fileID: 5376165636496884295}
   - component: {fileID: 4079660215937573983}
+  - component: {fileID: 5478845791214061811}
+  - component: {fileID: 351642334049297501}
   m_Layer: 0
   m_Name: Simple Plane
   m_TagString: Untagged
@@ -4934,27 +4935,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2572917233604337054
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203664255224226625}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 5
-  m_AngularDrag: 10
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &2847789166112658103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4962,7 +4942,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9203664255224226625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 376292fbf99b882429afdf81719a81d0, type: 3}
   m_Name: 
@@ -4980,7 +4960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9527836c82fdbf4ab8206838e436638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2572917233604337054}
   tiltSpeed: 400
   maxTiltAngle: 45
 --- !u!114 &5376165636496884295
@@ -4998,11 +4977,12 @@ MonoBehaviour:
   pilotPrefab: {fileID: 8765447072851436861, guid: 489547b14d29c3c44af319c935b0636c, type: 3}
   pilotSpawnPoint: {fileID: 5625209359744956937}
   pilotMinLaunchSpeed: 350
-  pilotMaxLaunchSpeed: 410
+  pilotMaxLaunchSpeed: 400
   pilotMinLaunchTorque: 320
   pilotMaxLaunchTorque: 385
   crashSpeed: 0.015
   noPilotSprite: {fileID: 21300000, guid: aebbbed203113f0439892058a6847f6f, type: 3}
+  horizontalVelocity: 14
 --- !u!70 &4079660215937573983
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5019,3 +4999,36 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.41}
   m_Size: {x: 7.25, y: 2.66}
   m_Direction: 1
+--- !u!114 &5478845791214061811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203664255224226625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60049e3e344cdac46a3508f2e89a7046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &351642334049297501
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203664255224226625}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

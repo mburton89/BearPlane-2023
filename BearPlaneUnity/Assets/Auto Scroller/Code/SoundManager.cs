@@ -18,6 +18,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<AudioSource> bearSounds;
     int bearSoundIndex;
 
+    [SerializeField] List<AudioSource> shoutSounds;
+    int shoutSoundIndex;
+
     [SerializeField] List<AudioSource> parachuteSounds;
     int parachuteSoundIndex;
 
@@ -29,6 +32,7 @@ public class SoundManager : MonoBehaviour
         Explosion,
         Guts,
         Bear,
+        Shout,
         Parachute,
         Eject
     }
@@ -79,6 +83,19 @@ public class SoundManager : MonoBehaviour
             else
             {
                 bearSoundIndex = 0;
+            }
+        }
+
+        else if (soundEffect == SoundEffect.Shout)
+        {
+            audioSourceToPlay = shoutSounds[shoutSoundIndex];
+            if (shoutSoundIndex < shoutSounds.Count - 1)
+            {
+                shoutSoundIndex++;
+            }
+            else
+            {
+                shoutSoundIndex = 0;
             }
         }
 

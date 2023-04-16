@@ -16,13 +16,10 @@ public class Blimp : MonoBehaviour
         if (rand == 1)
         {
             rb.AddForce(Vector2.up * verticalVelocity);
-            print("rand == 1");
         }
         else if (rand == 2)
         {
             rb.AddForce(Vector2.down * verticalVelocity);
-
-            print("rand == 2");
         }
     }
 
@@ -62,7 +59,7 @@ public class Blimp : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Explosion"); // Load the prefab from the Resources folder
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         //ScreenShaker.Instance.ShakeScreen();
-        //SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
         Destroy(gameObject);
     }
 }

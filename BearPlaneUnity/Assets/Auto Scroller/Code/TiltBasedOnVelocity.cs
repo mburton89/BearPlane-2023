@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TiltBasedOnVelocity : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb; // The rigidbody we want to base the tilt on
+    Rigidbody2D rb; // The rigidbody we want to base the tilt on
     [SerializeField] private float tiltSpeed = 10f; // The speed at which the object should tilt
     [SerializeField] private float maxTiltAngle = 45f; // The maximum angle the object can tilt
 
@@ -11,6 +11,11 @@ public class TiltBasedOnVelocity : MonoBehaviour
     private void Awake()
     {
         initialRotationZ = transform.rotation.eulerAngles.z;
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()

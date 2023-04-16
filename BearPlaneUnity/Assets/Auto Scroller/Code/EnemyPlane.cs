@@ -18,10 +18,14 @@ public class EnemyPlane : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public Sprite noPilotSprite;
 
+    public float horizontalVelocity;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        rb.velocity = new Vector2(horizontalVelocity, 0);
     }
 
     private void Update()
@@ -45,7 +49,6 @@ public class EnemyPlane : MonoBehaviour
             Bear bear = collision.gameObject.GetComponent<Bear>();
             Vector2 launchVelocity = new Vector2(bear.gameObject.GetComponent<MoveRight>().speed + 4, bear.rb.velocity.y * 1.4f);
             LaunchPilot(launchVelocity);
-
             Explode();
         }
     }
@@ -66,11 +69,16 @@ public class EnemyPlane : MonoBehaviour
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Explosion);
+
+        Bear.Instance.IncreaseSpeed();
+
         Destroy(gameObject);
     }
 
     public void EjectPilot()
     {
+        if (hasLaunchedPilot) return;
+
         GameObject launchedPilot = Instantiate(pilotPrefab, pilotSpawnPoint.position, transform.rotation, null);
 
         launchedPilot.GetComponent<Rigidbody2D>().velocity = rb.velocity;
@@ -92,6 +100,8 @@ public class EnemyPlane : MonoBehaviour
 
     public void LaunchPilot(Vector2 velocity)
     {
+        if (hasLaunchedPilot) return;
+
         GameObject launchedPilot = Instantiate(pilotPrefab, pilotSpawnPoint.position, transform.rotation, null);
 
         launchedPilot.GetComponent<Rigidbody2D>().velocity = velocity;
@@ -104,7 +114,7 @@ public class EnemyPlane : MonoBehaviour
 
         hasLaunchedPilot = true;
 
-        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
+        //SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
 
         print("launchedPilot.GetComponent<Rigidbody2D>().velocity  " + launchedPilot.GetComponent<Rigidbody2D>().velocity);
     }

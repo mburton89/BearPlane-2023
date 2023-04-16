@@ -65,12 +65,16 @@ public class Pilot : MonoBehaviour
         ScreenShaker.Instance.ShakeScreen();
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
+
+        Bear.Instance.IncreaseSpeed();
+
         Destroy(gameObject);
     }
 
     private IEnumerator CanExplodeBuffer()
     {
         yield return new WaitForSeconds(secondsBeforeCanExplode);
+        GetComponent<Collider2D>().enabled = true;
         canExplode = true;
     }
 }
