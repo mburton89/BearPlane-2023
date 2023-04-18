@@ -16,8 +16,9 @@ public class Pilot : MonoBehaviour
     bool hasDeployedParachute;
     bool canExplode;
     public float secondsBeforeCanExplode = 0.2f;
-    [HideInInspector] public bool shouldDeployParachute = true;
-    [HideInInspector] public GameObject ownedPlane;
+    [HideInInspector] public GameObject ownedPlane; 
+
+    public float maxYposToParachute;
 
     void Start()
     {
@@ -41,7 +42,7 @@ public class Pilot : MonoBehaviour
 
         yield return new WaitForSeconds(secondsToWaitForParachute);
 
-        if (shouldDeployParachute) //dud parachute
+        if (transform.position.y < maxYposToParachute) //dud parachute
         {
             hasDeployedParachute = true;
             spriteRenderer.sprite = parachuteSprite;
@@ -61,7 +62,31 @@ public class Pilot : MonoBehaviour
         if (!canExplode) return;
 
         GameObject prefab = Resources.Load<GameObject>("Blood"); // Load the prefab from the Resources folder
-        Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
+        Instantiate(prefab, transform.position, Quaternion.identity, null); // Instantiate the prefab
+        ScreenShaker.Instance.ShakeScreen();
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);
+
+        Bear.Instance.IncreaseSpeed();
+
+        Destroy(gameObject);
+    }
+
+    public void Explode(bool isFromRoar)
+    {
+        if (!canExplode) return;
+
+        if (isFromRoar)
+        {
+            GameObject prefab = Resources.Load<GameObject>("Blood Cone"); // Load the prefab from the Resources folder
+            Instantiate(prefab, transform.position, Quaternion.identity, null); // Instantiate the prefab
+        }
+        else
+        {
+            GameObject prefab = Resources.Load<GameObject>("Blood"); // Load the prefab from the Resources folder
+            Instantiate(prefab, transform.position, Quaternion.identity, null); // Instantiate the prefab
+        }
+
         ScreenShaker.Instance.ShakeScreen();
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Guts);
         SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Bear);

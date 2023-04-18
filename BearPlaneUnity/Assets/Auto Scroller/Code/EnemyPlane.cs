@@ -41,6 +41,12 @@ public class EnemyPlane : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EnemyPlane>())
         {
+            Vector2 dir = transform.position - collision.transform.position;
+            Vector2 dirMultiplied = dir.normalized * 10;
+            print(dirMultiplied);
+            Vector2 newLaunchVelocity = rb.velocity + dirMultiplied;
+
+            LaunchPilot(newLaunchVelocity);
             collision.gameObject.GetComponent<EnemyPlane>().Explode();
         }
 
@@ -57,14 +63,24 @@ public class EnemyPlane : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Pilot>() && collision.gameObject.GetComponent<Pilot>().ownedPlane != gameObject)
         {
-            collision.gameObject.GetComponent<Pilot>().Explode();
             Explode();
+
+            collision.gameObject.GetComponent<Pilot>().Explode();
+
+            Vector2 dir = transform.position - collision.transform.position;
+            Vector2 dirMultiplied = dir.normalized * 10;
+
+            print(dirMultiplied);
+
+            Vector2 newLaunchVelocity = rb.velocity + dirMultiplied;
+
+            LaunchPilot(newLaunchVelocity);
+
         }
     }
 
     public void Explode()
     {
-        //LaunchPilot();
         GameObject prefab = Resources.Load<GameObject>("Explosion"); // Load the prefab from the Resources folder
         Instantiate(prefab, transform.position, transform.rotation); // Instantiate the prefab
         ScreenShaker.Instance.ShakeScreen();
@@ -110,12 +126,7 @@ public class EnemyPlane : MonoBehaviour
         launchedPilot.GetComponent<Rigidbody2D>().AddTorque(randLaunchTorque);
 
         launchedPilot.GetComponent<Pilot>().ownedPlane = gameObject;
-        launchedPilot.GetComponent<Pilot>().shouldDeployParachute = false;
 
         hasLaunchedPilot = true;
-
-        //SoundManager.Instance.PlaySound(SoundManager.SoundEffect.Eject);
-
-        print("launchedPilot.GetComponent<Rigidbody2D>().velocity  " + launchedPilot.GetComponent<Rigidbody2D>().velocity);
     }
 }

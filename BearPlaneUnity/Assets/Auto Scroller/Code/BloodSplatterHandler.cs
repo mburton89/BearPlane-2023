@@ -8,7 +8,6 @@ public class BloodSplatterHandler : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        print("OnParticleCollision");
         GameObject bloodSplatter = Instantiate(bloodSplatterPrefab, other.transform.position, other.transform.rotation, this.transform);
         bloodSplatter.transform.eulerAngles = Vector3.zero;
     }

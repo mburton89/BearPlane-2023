@@ -43,6 +43,16 @@ public class RoarWave : MonoBehaviour
 
             print("OnTriggerEnter2D");
         }
+
+        if (collision.gameObject.GetComponent<Pilot>())
+        {
+            collision.gameObject.GetComponent<Pilot>().Explode(true);
+        }
+
+        if (collision.gameObject.GetComponent<Blimp>())
+        {
+            collision.gameObject.GetComponent<Blimp>().hasBeenRoared = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -7,6 +7,8 @@ public class Blimp : MonoBehaviour
     public float verticalVelocity;
     Rigidbody2D rb;
 
+    [HideInInspector] public bool hasBeenRoared;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +38,12 @@ public class Blimp : MonoBehaviour
             collision.gameObject.GetComponent<Pilot>().Explode();
             Explode();
         }
+
+        if (collision.gameObject.GetComponent<EnemyPlane>() && hasBeenRoared)
+        {
+            collision.gameObject.GetComponent<EnemyPlane>().Explode();
+            Explode();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -49,6 +57,12 @@ public class Blimp : MonoBehaviour
         if (collision.gameObject.GetComponent<Pilot>())
         {
             collision.gameObject.GetComponent<Pilot>().Explode();
+            Explode();
+        }
+
+        if (collision.gameObject.GetComponent<EnemyPlane>() && hasBeenRoared)
+        {
+            collision.gameObject.GetComponent<EnemyPlane>().Explode();
             Explode();
         }
     }
